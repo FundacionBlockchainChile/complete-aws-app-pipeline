@@ -54,7 +54,9 @@
                 "iam:PutRolePolicy",
                 "iam:DeleteRolePolicy",
                 "iam:AttachRolePolicy",
-                "iam:DetachRolePolicy"
+                "iam:DetachRolePolicy",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies"
             ],
             "Resource": [
                 "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role",
@@ -77,7 +79,9 @@
                 "s3:PutEncryptionConfiguration",
                 "s3:PutBucketPublicAccessBlock",
                 "s3:PutBucketCORS",
-                "s3:PutLifecycleConfiguration"
+                "s3:PutLifecycleConfiguration",
+                "s3:GetBucketPolicy",
+                "s3:PutBucketPolicy"
             ],
             "Resource": [
                 "arn:aws:s3:::terraform-state-complete-pipeline",
@@ -110,7 +114,8 @@
                 "ec2:AuthorizeSecurityGroupEgress",
                 "ec2:AuthorizeSecurityGroupIngress",
                 "ec2:UpdateSecurityGroupRuleDescriptionsEgress",
-                "ec2:UpdateSecurityGroupRuleDescriptionsIngress"
+                "ec2:UpdateSecurityGroupRuleDescriptionsIngress",
+                "ec2:DescribeVpcAttribute"
             ],
             "Resource": "*"
         },
