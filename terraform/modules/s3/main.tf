@@ -10,6 +10,7 @@ resource "aws_s3_bucket" "main" {
     Name = "${var.project_name}-storage"
     Environment = var.environment
     Tag = "complete-pipeline-exercise"
+    LastUpdated = "2025-07-16"
   }
 }
 
