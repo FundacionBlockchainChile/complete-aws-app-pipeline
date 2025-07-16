@@ -47,6 +47,28 @@
             "Resource": [
                 "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role"
             ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::terraform-state-complete-pipeline",
+                "arn:aws:s3:::terraform-state-complete-pipeline/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:DeleteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-1:489585378121:table/terraform-state-lock"
         }
     ]
 }
