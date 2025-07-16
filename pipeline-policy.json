@@ -81,7 +81,8 @@
                 "s3:PutBucketCORS",
                 "s3:PutLifecycleConfiguration",
                 "s3:GetBucketPolicy",
-                "s3:PutBucketPolicy"
+                "s3:PutBucketPolicy",
+                "s3:GetBucketAcl"
             ],
             "Resource": [
                 "arn:aws:s3:::terraform-state-complete-pipeline",
@@ -129,11 +130,13 @@
                 "logs:DescribeLogStreams",
                 "logs:CreateLogStream",
                 "logs:DeleteLogStream",
-                "logs:PutLogEvents"
+                "logs:PutLogEvents",
+                "logs:GetLogEvents",
+                "logs:FilterLogEvents"
             ],
             "Resource": [
-                "arn:aws:logs:us-east-1:489585378121:log-group:/ecs/complete-pipeline-*",
-                "arn:aws:logs:us-east-1:489585378121:log-group:/ecs/complete-pipeline-*:*"
+                "arn:aws:logs:us-east-1:489585378121:log-group:*",
+                "arn:aws:logs:us-east-1:489585378121:log-group:*:*"
             ]
         },
         {
