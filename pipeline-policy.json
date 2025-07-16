@@ -35,17 +35,30 @@
                 "ecs:DescribeTaskDefinition",
                 "ecs:RegisterTaskDefinition",
                 "ecs:UpdateService",
-                "ecs:DescribeServices"
+                "ecs:DescribeServices",
+                "ecs:DescribeClusters",
+                "ecs:CreateService",
+                "ecs:DeleteService",
+                "ecs:ListTasks",
+                "ecs:DescribeTasks"
             ],
             "Resource": "*"
         },
         {
             "Effect": "Allow",
             "Action": [
-                "iam:PassRole"
+                "iam:PassRole",
+                "iam:GetRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy"
             ],
             "Resource": [
-                "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role"
+                "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role",
+                "arn:aws:iam::489585378121:role/complete-pipeline-*"
             ]
         },
         {
@@ -54,11 +67,23 @@
                 "s3:ListBucket",
                 "s3:GetObject",
                 "s3:PutObject",
-                "s3:DeleteObject"
+                "s3:DeleteObject",
+                "s3:GetBucketVersioning",
+                "s3:GetEncryptionConfiguration",
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetBucketCORS",
+                "s3:GetLifecycleConfiguration",
+                "s3:PutBucketVersioning",
+                "s3:PutEncryptionConfiguration",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:PutBucketCORS",
+                "s3:PutLifecycleConfiguration"
             ],
             "Resource": [
                 "arn:aws:s3:::terraform-state-complete-pipeline",
-                "arn:aws:s3:::terraform-state-complete-pipeline/*"
+                "arn:aws:s3:::terraform-state-complete-pipeline/*",
+                "arn:aws:s3:::complete-pipeline-dev-storage",
+                "arn:aws:s3:::complete-pipeline-dev-storage/*"
             ]
         },
         {
@@ -69,6 +94,57 @@
                 "dynamodb:DeleteItem"
             ],
             "Resource": "arn:aws:dynamodb:us-east-1:489585378121:table/terraform-state-lock"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeInternetGateways",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteSecurityGroup",
+                "ec2:RevokeSecurityGroupEgress",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:UpdateSecurityGroupRuleDescriptionsEgress",
+                "ec2:UpdateSecurityGroupRuleDescriptionsIngress"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogGroups",
+                "logs:CreateLogGroup",
+                "logs:DeleteLogGroup",
+                "logs:PutRetentionPolicy",
+                "logs:DescribeLogStreams",
+                "logs:CreateLogStream",
+                "logs:DeleteLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:us-east-1:489585378121:log-group:/ecs/complete-pipeline-*",
+                "arn:aws:logs:us-east-1:489585378121:log-group:/ecs/complete-pipeline-*:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:CreateSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:ListSecrets"
+            ],
+            "Resource": [
+                "arn:aws:secretsmanager:us-east-1:489585378121:secret:complete-pipeline/*"
+            ]
         }
     ]
 }

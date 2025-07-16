@@ -5,6 +5,7 @@
 *.tfvars
 !terraform/environments/*.tfvars
 *.tfplan
+terraform/tfplan
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
