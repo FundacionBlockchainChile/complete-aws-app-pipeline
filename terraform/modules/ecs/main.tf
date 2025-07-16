@@ -119,6 +119,101 @@ resource "aws_ecs_task_definition" "frontend" {
   }
 }
 
+# Frontend Service
+resource "aws_ecs_service" "frontend" {
+  name            = "frontend-service"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.frontend.arn
+  desired_count   = 1
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets          = var.subnet_ids
+    assign_public_ip = true
+    security_groups  = [aws_security_group.frontend.id]
+  }
+
+  tags = {
+    Name = "${var.project_name}-frontend-service"
+    Environment = var.environment
+    Tag = "complete-pipeline-exercise"
+  }
+}
+
+# Backend Service
+resource "aws_ecs_service" "backend" {
+  name            = "backend-service"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.backend.arn
+  desired_count   = 1
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets          = var.subnet_ids
+    assign_public_ip = true
+    security_groups  = [aws_security_group.backend.id]
+  }
+
+  tags = {
+    Name = "${var.project_name}-backend-service"
+    Environment = var.environment
+    Tag = "complete-pipeline-exercise"
+  }
+}
+
+# Security Groups
+resource "aws_security_group" "frontend" {
+  name        = "${var.project_name}-frontend-sg"
+  description = "Security group for frontend service"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.project_name}-frontend-sg"
+    Environment = var.environment
+    Tag = "complete-pipeline-exercise"
+  }
+}
+
+resource "aws_security_group" "backend" {
+  name        = "${var.project_name}-backend-sg"
+  description = "Security group for backend service"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.project_name}-backend-sg"
+    Environment = var.environment
+    Tag = "complete-pipeline-exercise"
+  }
+}
+
 # CloudWatch Log Groups
 resource "aws_cloudwatch_log_group" "backend" {
   name              = "/ecs/${var.project_name}-backend"

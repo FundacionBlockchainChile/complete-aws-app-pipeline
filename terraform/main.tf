@@ -36,7 +36,8 @@ module "rds" {
   environment     = var.environment
   vpc_id          = module.vpc.vpc_id
   subnet_ids      = module.vpc.public_subnet_ids
-  ecs_security_group_id = module.vpc.security_group_id
+  depends_on      = [module.ecs]
+  ecs_security_group_id = module.ecs.backend_security_group_id
 
   postgres_version   = var.postgres_version
   instance_class    = var.db_instance_class

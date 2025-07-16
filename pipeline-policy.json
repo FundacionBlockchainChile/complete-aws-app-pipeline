@@ -45,8 +45,7 @@
                 "iam:PassRole"
             ],
             "Resource": [
-                "arn:aws:iam::489585378121:role/ecsTaskExecutionRole",
-                "arn:aws:iam::489585378121:role/ecsTaskRole"
+                "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role"
             ]
         }
     ]

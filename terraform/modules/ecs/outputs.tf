@@ -21,4 +21,9 @@ output "backend_task_definition_arn" {
 output "frontend_task_definition_arn" {
   description = "ARN of the frontend task definition"
   value       = aws_ecs_task_definition.frontend.arn
+}
+
+output "backend_security_group_id" {
+  description = "ID of the backend security group"
+  value       = aws_security_group.backend.id
 } 
