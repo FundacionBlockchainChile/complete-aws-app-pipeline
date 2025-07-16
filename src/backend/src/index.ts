@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -36,4 +36,7 @@ const startServer = async () => {
   }
 };
 
-startServer(); 
+// Only start the server if this file is run directly
+if (require.main === module) {
+  startServer();
+} 
