@@ -153,7 +153,11 @@ jobs:
     - name: Terraform Plan
       run: |
         cd terraform
-        terraform plan -var-file="environments/dev.tfvars" -out=tfplan
+        terraform plan \
+          -var-file="environments/dev.tfvars" \
+          -var="backend_image=489585378121.dkr.ecr.us-east-1.amazonaws.com/backend:${{ github.sha }}" \
+          -var="frontend_image=489585378121.dkr.ecr.us-east-1.amazonaws.com/frontend:${{ github.sha }}" \
+          -out=tfplan
     
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
