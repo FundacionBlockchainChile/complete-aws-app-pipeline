@@ -39,3 +39,9 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Archivos sensibles de Cursor
+cursor_configurar_pipeline_ci_cd_en_aws.md
+cursor_continue_discussion_on_aws_app_p.md
+cursor_plan_for_complete_aws_app_pipeli.md
+reference_README.md
