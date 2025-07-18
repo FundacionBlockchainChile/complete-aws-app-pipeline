@@ -17,142 +17,24 @@
                 "ecr:CompleteLayerUpload",
                 "ecr:PutImage"
             ],
-            "Resource": [
-                "arn:aws:ecr:us-east-1:489585378121:repository/frontend",
-                "arn:aws:ecr:us-east-1:489585378121:repository/backend"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ecr:GetAuthorizationToken"
-            ],
             "Resource": "*"
         },
         {
             "Effect": "Allow",
             "Action": [
-                "ecs:DescribeTaskDefinition",
-                "ecs:RegisterTaskDefinition",
-                "ecs:UpdateService",
-                "ecs:DescribeServices",
-                "ecs:DescribeClusters",
-                "ecs:CreateService",
-                "ecs:DeleteService",
-                "ecs:ListTasks",
-                "ecs:DescribeTasks"
+                "ecs:*",
+                "ec2:*",
+                "elasticloadbalancing:*",
+                "ecr:*",
+                "cloudwatch:*",
+                "s3:*",
+                "rds:*",
+                "logs:*",
+                "secretsmanager:*",
+                "iam:*",
+                "dynamodb:*"
             ],
             "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "iam:PassRole",
-                "iam:GetRole",
-                "iam:CreateRole",
-                "iam:DeleteRole",
-                "iam:PutRolePolicy",
-                "iam:DeleteRolePolicy",
-                "iam:AttachRolePolicy",
-                "iam:DetachRolePolicy",
-                "iam:ListRolePolicies",
-                "iam:ListAttachedRolePolicies"
-            ],
-            "Resource": [
-                "arn:aws:iam::489585378121:role/complete-pipeline-ecs-task-execution-role",
-                "arn:aws:iam::489585378121:role/complete-pipeline-*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:Get*",
-                "s3:List*",
-                "s3:Put*",
-                "s3:DeleteObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::terraform-state-complete-pipeline",
-                "arn:aws:s3:::terraform-state-complete-pipeline/*",
-                "arn:aws:s3:::complete-pipeline-dev-storage",
-                "arn:aws:s3:::complete-pipeline-dev-storage/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "dynamodb:GetItem",
-                "dynamodb:PutItem",
-                "dynamodb:DeleteItem"
-            ],
-            "Resource": "arn:aws:dynamodb:us-east-1:489585378121:table/terraform-state-lock"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:Describe*",
-                "ec2:Create*",
-                "ec2:Delete*",
-                "ec2:Revoke*",
-                "ec2:Authorize*",
-                "ec2:Update*",
-                "ec2:Modify*"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "logs:DescribeLogGroups",
-                "logs:CreateLogGroup",
-                "logs:DeleteLogGroup",
-                "logs:PutRetentionPolicy",
-                "logs:DescribeLogStreams",
-                "logs:CreateLogStream",
-                "logs:DeleteLogStream",
-                "logs:PutLogEvents",
-                "logs:GetLogEvents",
-                "logs:FilterLogEvents",
-                "logs:ListTagsForResource",
-                "logs:TagLogGroup",
-                "logs:UntagLogGroup"
-            ],
-            "Resource": [
-                "arn:aws:logs:us-east-1:489585378121:log-group:*",
-                "arn:aws:logs:us-east-1:489585378121:log-group:*:*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "rds:DescribeDBSubnetGroups",
-                "rds:CreateDBSubnetGroup",
-                "rds:DeleteDBSubnetGroup",
-                "rds:DescribeDBInstances",
-                "rds:CreateDBInstance",
-                "rds:DeleteDBInstance",
-                "rds:ModifyDBInstance",
-                "rds:AddTagsToResource",
-                "rds:RemoveTagsFromResource",
-                "rds:ListTagsForResource",
-                "rds:DescribeDBEngineVersions"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "secretsmanager:CreateSecret",
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:PutSecretValue",
-                "secretsmanager:UpdateSecret",
-                "secretsmanager:DeleteSecret",
-                "secretsmanager:DescribeSecret",
-                "secretsmanager:ListSecrets"
-            ],
-            "Resource": [
-                "arn:aws:secretsmanager:us-east-1:489585378121:secret:complete-pipeline/*"
-            ]
         }
     ]
 }
